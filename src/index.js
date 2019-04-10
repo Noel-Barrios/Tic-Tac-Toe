@@ -3,23 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 
-// the Square component renders a single <button>
-class Square extends React.Component {
 
-    // the render method returns a description of what you want to see on the screen.
-    render() {
-      return (
-
-        // display the current state's value when clicked
-        <button 
-          className="square" 
-          onClick={() => this.props.onClick({value: 'X'})}
-        >
-          {this.props.value}
-        </button>
-      );
-    }
-  }
+// change the Square component into a function component
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}
 
 
 
@@ -35,6 +27,7 @@ class Square extends React.Component {
       };
     }
 
+  
     handleClick(i){
       const squares = this.state.squares.splice();
       squares[i] = x;
