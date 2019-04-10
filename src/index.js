@@ -6,16 +6,6 @@ import './index.css';
 // the Square component renders a single <button>
 class Square extends React.Component {
 
-  // add a constructor to the class to initialize the state
-    constructor(props) {
-      // in JavaSCript classes, you need to always call super when defining the constructor of a subclass. 
-      super(props);
-      this.state = {
-        value: null,
-      };
-    }
-
-
     // the render method returns a description of what you want to see on the screen.
     render() {
       return (
@@ -23,18 +13,47 @@ class Square extends React.Component {
         // display the current state's value when clicked
         <button 
           className="square" 
-          onClick={() => this.setState({value: 'X'})}
+          onClick={() => this.props.onClick({value: 'X'})}
         >
-          {this.state.value}
+          {this.props.value}
         </button>
       );
     }
   }
+
+
+
+
   
   class Board extends React.Component {
+    // add a constructor to the Board and set the Board's initial state to contain an array of
+    // 9 nulls corresponding to the 9 squares.
+    constructor (props) {
+      super(props);
+      this.state = {
+        squares: Array(9).fill(null),
+      };
+    }
+
+    handleClick(i){
+      const squares = this.state.squares.splice();
+      squares[i] = x;
+      this.setState({squares: squares});
+    }
+
     renderSquare(i) {
       // we added a prop called value to the Square
-      return <Square value={i}/>;
+      // return <Square value={i}/>;
+
+      // modify the Board to instruct each Square about its current value
+      // Here we are passing down two props from Board to Square: value and onClick
+      // The onClick prop is a function that Square can call when clicked.  
+      return (
+        <Square 
+          value={this.state.squares[i]}
+          onClick={ () => this.handleClick(i)} 
+        />
+      );
     }
   
     render() {
@@ -63,6 +82,10 @@ class Square extends React.Component {
     }
   }
   
+
+
+
+
   class Game extends React.Component {
     render() {
       return (
@@ -79,6 +102,10 @@ class Square extends React.Component {
     }
   }
   
+
+
+
+
   // ========================================
   
   ReactDOM.render(
