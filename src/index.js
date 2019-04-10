@@ -5,12 +5,27 @@ import './index.css';
 
 // the Square component renders a single <button>
 class Square extends React.Component {
-  // the render method returns a description of what you want to see on the screen.
+
+  // add a constructor to the class to initialize the state
+    constructor(props) {
+      // in JavaSCript classes, you need to always call super when defining the constructor of a subclass. 
+      super(props);
+      this.state = {
+        value: null,
+      };
+    }
+
+
+    // the render method returns a description of what you want to see on the screen.
     render() {
       return (
-        <button className="square">
-          {/* show value */}
-          {this.props.value}
+
+        // display the current state's value when clicked
+        <button 
+          className="square" 
+          onClick={() => this.setState({value: 'X'})}
+        >
+          {this.state.value}
         </button>
       );
     }
