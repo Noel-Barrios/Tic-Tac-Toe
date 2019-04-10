@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+
+// the Square component renders a single <button>
 class Square extends React.Component {
+  // the render method returns a description of what you want to see on the screen.
     render() {
       return (
         <button className="square">
-          {/* TODO */}
+          {/* show value */}
+          {this.props.value}
         </button>
       );
     }
@@ -14,7 +18,8 @@ class Square extends React.Component {
   
   class Board extends React.Component {
     renderSquare(i) {
-      return <Square />;
+      // we added a prop called value to the Square
+      return <Square value={i}/>;
     }
   
     render() {
